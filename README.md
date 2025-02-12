@@ -16,7 +16,6 @@ without having to rebuild them for all environments.
 
 * An archive of relocatable binaries is created.
 
-
 ## Tools
 
 * Libs:
@@ -45,11 +44,20 @@ without having to rebuild them for all environments.
   * ram latency
   * tcpdump
 
-## How to build
+## Howto
 
-Deploy this repository on a Debian Linux host and run the
-`000-build.sh` script.
+* Deploy this repository on a Debian Linux host and run the
+  `000-build.sh` script.
 
+* A `bench-tools-DATE.tgz` archive is generated
+
+* Unarchive the `bench-tools-DATE.tgz` on a machine.
+
+* Run the `fix-interpreter` script to instruct all binaries to use
+  provided `ld-linux` interpreter.
+
+* Optionnaly deploy the tools in the `PATH` (ie. `install-tools
+  /usr/local/bin/`)
 
 ## Copyright
 
