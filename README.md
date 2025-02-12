@@ -59,6 +59,32 @@ without having to rebuild them for all environments.
 * Optionnaly deploy the tools in the `PATH` (ie. `install-tools
   /usr/local/bin/`)
 
+
+## Adding a new tool
+
+
+* Create the chroot with `010-build-debian.sh`
+
+* Mount this repo into the chroot into `~build/tools-builder`:
+
+```
+mount -o bind,ro /path/to/tools-builder CHROOT/home/build/tools-builder
+```
+
+* Enter the chroot: `chroot CHROOT`
+
+* Become `build`: `sudo -u build -i`
+
+* Execute a build script: `./tools-builder/the-script.sh`
+
+After testing, do not forget to unmount the `tools-builder` from the
+chroot:
+
+```
+umount CHROOT/home/build/tools-builder
+```
+
+
 ## Copyright
 
 Copyright (c) 2025 Sébastien Gross
