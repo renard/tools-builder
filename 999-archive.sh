@@ -33,10 +33,12 @@ cat <<'EOF' > $ARCHIVE-$RELEASE/fix-interpreter
 # file. It should be run each time tool folder is deployed on a machine or
 # moved on the file system.
 
-interpreter=$(find $(dirname $(readlink -f $0)) -type f -executable -name 'ld-linux-*')
+mydir=$(dirname $(readlink -f $0))
 
-for f in $(find $(dirname $0) -regextype grep  -type f -executable -not -regex  '.*/\(ld-linux-.*\|fix-interpreter\|install-tools\|patchelf\)'); do
-    $(dirname $0)/patchelf --set-interpreter "$interpreter" $f
+interpreter=$(find $mydir -type f -executable -name 'ld-linux-*')
+
+for f in $(find $mydir -regextype grep  -type f -executable -not -regex  '.*/\(ld-linux-.*\|fix-interpreter\|install-tools\|patchelf\)'); do
+    $mydir/patchelf --set-interpreter "$interpreter" $f
 done
 EOF
 
