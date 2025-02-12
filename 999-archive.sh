@@ -9,7 +9,7 @@ set -e
 
 mkdir -p $ARCHIVE
 cp -a $PREFIX/bin/* $ARCHIVE
-rm $ARCHIVE/curl-config* $ARCHIVE/pcap-config* $ARCHIVE/tcpdump.*
+rm $ARCHIVE/curl-config* $ARCHIVE/pcap-config* $ARCHIVE/tcpdump.* $ARCHIVE/rsync-ssl
 
 ldd $ARCHIVE/* | tr -s ' ' | sed -n 's,.*[[:space:]]\(/.*\)[[:space:]]\+(.*,\1,p' | sort |uniq | xargs cp -L -t $ARCHIVE
 set -x
