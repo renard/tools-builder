@@ -11,6 +11,11 @@ mkdir -p $ARCHIVE/bin $ARCHIVE/lib
 cp -a $PREFIX/bin/* $ARCHIVE/bin
 rm $ARCHIVE/bin/curl-config* $ARCHIVE/bin/pcap-config* $ARCHIVE/bin/tcpdump.* $ARCHIVE/bin/rsync-ssl
 
+if test -z "$KEEP_NGHTTP_APPS"; then
+	rm $ARCHIVE/bin/nghttp*
+fi
+
+
 LD_LIBRARY_PATH=$PREFIX/lib ldd $ARCHIVE/bin/* $ARCHIVE/lib/*| tr -s ' ' | sed -n 's,.*[[:space:]]\(/.*\)[[:space:]]\+(.*,\1,p' | sort |uniq | xargs cp -L -t $ARCHIVE/lib
 
 chmod 0755 $ARCHIVE/bin/* 
@@ -21,7 +26,7 @@ $ARCHIVE/patchelf --set-rpath '$ORIGIN/../lib' $ARCHIVE/bin/*
 for l in $(find $ARCHIVE/lib -regextype grep -type f -not -regex '.*/\(ld-linux-.*\)'); do
     $ARCHIVE/patchelf --set-rpath '$ORIGIN' $l
 done
-strip $ARCHIVE/bin/* $ARCHIVE/lib/*
+strip $ARCHIVE/bin/* $ARCHIVE/lib/* $ARCHIVE/patchelf
 du -shc $ARCHIVE
 
 cat <<'EOF' > $ARCHIVE/fix-interpreter

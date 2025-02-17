@@ -12,3 +12,7 @@ CURL_VERSION=curl-8_12_0
 LIBPCAP_VERSION=libpcap-1.10.5
 TCPDUMP_VERSION=tcpdump-4.99.5
 HAPROXY_VERSION=v3.1.0
+
+# Uncomment this line to keep nghttp* apps. Binary file archive will
+# increase drastically since libicudata.so is statically linked.
+# KEEP_NGHTTP_APPS=1
