@@ -7,26 +7,24 @@
 set -e
 . "$(dirname $0)/env"
 
-mkdir -p $ARCHIVE
-cp -a $PREFIX/bin/* $ARCHIVE
-rm $ARCHIVE/curl-config* $ARCHIVE/pcap-config* $ARCHIVE/tcpdump.* $ARCHIVE/rsync-ssl
+mkdir -p $ARCHIVE/bin $ARCHIVE/lib
+cp -a $PREFIX/bin/* $ARCHIVE/bin
+rm $ARCHIVE/bin/curl-config* $ARCHIVE/bin/pcap-config* $ARCHIVE/bin/tcpdump.* $ARCHIVE/bin/rsync-ssl
 
-ldd $ARCHIVE/* | tr -s ' ' | sed -n 's,.*[[:space:]]\(/.*\)[[:space:]]\+(.*,\1,p' | sort |uniq | xargs cp -L -t $ARCHIVE
-set -x
-mv $ARCHIVE $ARCHIVE-$RELEASE
-chmod 0644 $ARCHIVE-$RELEASE/*.so.* $ARCHIVE-$RELEASE/*.so
-du -shc $ARCHIVE-$RELEASE
-for f in $ARCHIVE-$RELEASE/*; do
-    case $f in 
-        */ld-linux-*) 
-            chmod 755 $f
-	    continue
-	    ;;
-    esac
-    $ARCHIVE-$RELEASE/patchelf --set-rpath '$ORIGIN' $f || true
+LD_LIBRARY_PATH=$PREFIX/lib ldd $ARCHIVE/bin/* $ARCHIVE/lib/*| tr -s ' ' | sed -n 's,.*[[:space:]]\(/.*\)[[:space:]]\+(.*,\1,p' | sort |uniq | xargs cp -L -t $ARCHIVE/lib
+
+chmod 0755 $ARCHIVE/bin/* 
+mv $ARCHIVE/bin/patchelf $ARCHIVE
+
+du -shc $ARCHIVE
+$ARCHIVE/patchelf --set-rpath '$ORIGIN/../lib' $ARCHIVE/bin/*
+for l in $(find $ARCHIVE/lib -regextype grep -type f -not -regex '.*/\(ld-linux-.*\)'); do
+    $ARCHIVE/patchelf --set-rpath '$ORIGIN' $l
 done
-strip $ARCHIVE-$RELEASE/* || true
-cat <<'EOF' > $ARCHIVE-$RELEASE/fix-interpreter
+strip $ARCHIVE/bin/* $ARCHIVE/lib/*
+du -shc $ARCHIVE
+
+cat <<'EOF' > $ARCHIVE/fix-interpreter
 #!/bin/sh
 
 # This scripts changes the binary interpreter to use the local ld-linux lib
@@ -35,14 +33,20 @@ cat <<'EOF' > $ARCHIVE-$RELEASE/fix-interpreter
 
 mydir=$(dirname $(readlink -f $0))
 
-interpreter=$(find $mydir -type f -executable -name 'ld-linux-*')
+interpreter=$(find $mydir/lib -type f -executable -name 'ld-linux-*')
 
-for f in $(find $mydir -regextype grep  -type f -executable -not -regex  '.*/\(ld-linux-.*\|fix-interpreter\|install-tools\|patchelf\)'); do
+for f in $(find $mydir/bin -type f -executable); do
     $mydir/patchelf --set-interpreter "$interpreter" $f
+    $mydir/patchelf --set-rpath '$ORIGIN/../lib' $f
+done
+
+# Make sure all libraries but ld-linux use $ORIGIN as a search path
+for l in $(find ./bench-tools/lib -regextype grep -type f -not -regex '.*/\(ld-linux-.*\)'); do
+    $mydir/patchelf --set-rpath '$ORIGIN' $l
 done
 EOF
 
-cat <<'EOF' > $ARCHIVE-$RELEASE/install-tools
+cat <<'EOF' > $ARCHIVE/install-tools
 #!/bin/sh
 
 # This script installs (creates symlinks) the binaries in a specific folder
@@ -56,12 +60,13 @@ if test -z "$TARGET"; then
   TARGET=.
 fi
 
-for f in $(find $(dirname $0) -regextype grep  -type f -executable -not -regex  '.*/\(ld-linux-.*\|fix-interpreter\|install-tools\|patchelf\)'); do
+for f in $(find $(dirname $0)/bin -type f -executable); do
     ln -nfs $f $TARGET/$(basename $f)
 done
 EOF
 
-chmod 755 $ARCHIVE-$RELEASE/fix-interpreter $ARCHIVE-$RELEASE/install-tools
-du -shc $ARCHIVE-$RELEASE
+chmod 755 $ARCHIVE/fix-interpreter $ARCHIVE/install-tools
+mv $ARCHIVE $ARCHIVE-$RELEASE
+
 tar -C $(dirname $ARCHIVE) -cvzf $ARCHIVE-$RELEASE.tgz $(basename $ARCHIVE)-$RELEASE
 

@@ -13,9 +13,7 @@ autoreconf -i
 
 ./configure --enable-http3 --enable-app \
       --prefix=$PREFIX \
-      PKG_CONFIG_PATH="$PREFIX/lib/pkgconfig" \
-      LDFLAGS="$LDFLAGS -Wl,-rpath,$PREFIX/lib"
-      
+      PKG_CONFIG_PATH="$PREFIX/lib/pkgconfig"
 
 make -j$(nproc)
 make install

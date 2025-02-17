@@ -18,7 +18,6 @@ make -j $(nproc) \
         USE_QUIC=1 \
 	SSL_INC="$PREFIX/include/" \
 	SSL_LIB="$PREFIX/lib/" \
-        ADDLIB="-Wl,-rpath=$PREFIX/lib/" \
         USE_PTHREAD_EMULATION=1 \
 	ERR=1 \
 	USE_CRYPT_H=1 \
