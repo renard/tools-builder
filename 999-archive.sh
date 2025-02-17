@@ -46,7 +46,7 @@ for f in $(find $mydir/bin -type f -executable); do
 done
 
 # Make sure all libraries but ld-linux use $ORIGIN as a search path
-for l in $(find ./bench-tools/lib -regextype grep -type f -not -regex '.*/\(ld-linux-.*\)'); do
+for l in $(find $mydir/lib -regextype grep -type f -not -regex '.*/\(ld-linux-.*\)'); do
     $mydir/patchelf --set-rpath '$ORIGIN' $l
 done
 EOF
