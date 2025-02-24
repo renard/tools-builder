@@ -44,6 +44,12 @@ without having to rebuild them for all environments.
   * ram latency
   * tcpdump
 
+* other tools
+
+  * nmap
+  * strace
+  * socat
+
 ## Howto
 
 * Deploy this repository on a Debian Linux host and run the

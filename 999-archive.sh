@@ -9,7 +9,13 @@ set -e
 
 mkdir -p $ARCHIVE/bin $ARCHIVE/lib
 cp -a $PREFIX/bin/* $ARCHIVE/bin
-rm $ARCHIVE/bin/curl-config* $ARCHIVE/bin/pcap-config* $ARCHIVE/bin/tcpdump.* $ARCHIVE/bin/rsync-ssl
+rm -f \
+    $ARCHIVE/bin/curl-config* \
+    $ARCHIVE/bin/pcap-config* \
+    $ARCHIVE/bin/tcpdump.* \
+    $ARCHIVE/bin/rsync-ssl \
+    $ARCHIVE/bin/socat*.sh \
+    $ARCHIVE/bin/strace-log-merge
 
 if test -z "$KEEP_NGHTTP_APPS"; then
 	rm $ARCHIVE/bin/nghttp*
