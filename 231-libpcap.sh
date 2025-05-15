@@ -8,7 +8,7 @@ if ! test -d libpcap; then
 fi
 
 cd libpcap
-
+git checkout $LIBPCAP_VERSION
 
 autoreconf -fi
 ./configure \

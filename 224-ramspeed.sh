@@ -4,7 +4,7 @@ set -e
 cd $SRC
 
 if ! test -d ramspeed; then
-    git clone https://github.com/wtarreau/ramspeed
+    git clone --depth 1 -b $RAMSPEED_VERSION https://github.com/wtarreau/ramspeed
 fi 
 
 cd ramspeed

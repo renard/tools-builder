@@ -4,7 +4,7 @@ set -e
 cd $SRC
 
 if ! test -d logcnt; then
-    git clone https://github.com/wtarreau/logcnt
+    git clone --depth 1 -b $LOGCNT_VERSION https://github.com/wtarreau/logcnt
 fi 
 
 cd logcnt

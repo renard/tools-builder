@@ -4,7 +4,7 @@ set -e
 cd $SRC
 
 if ! test -d c2clat; then
-    git clone https://github.com/rigtorp/c2clat 
+    git clone --depth 1 -b  $C2CLAT_VERSION https://github.com/rigtorp/c2clat 
 fi 
 
 cd c2clat 

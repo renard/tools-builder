@@ -4,7 +4,7 @@ set -e
 cd $SRC
 
 if ! test -d httpterm; then
-    git clone https://github.com/wtarreau/httpterm
+    git clone --depth 1 -b $HTTPTERM_VERSION https://github.com/wtarreau/httpterm
 fi
 
 cd httpterm

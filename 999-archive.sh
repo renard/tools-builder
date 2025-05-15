@@ -10,6 +10,7 @@ set -e
 mkdir -p $ARCHIVE/bin $ARCHIVE/lib
 cp -a $PREFIX/bin/* $ARCHIVE/bin
 rm -f \
+    $ARCHIVE/bin/c_rehash* \
     $ARCHIVE/bin/curl-config* \
     $ARCHIVE/bin/pcap-config* \
     $ARCHIVE/bin/tcpdump.* \

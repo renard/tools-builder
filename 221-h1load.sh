@@ -4,7 +4,7 @@ set -e
 cd $SRC
 
 if ! test -d h1load; then
-    git clone https://github.com/wtarreau/h1load
+    git clone --depth 1 -b  $H1LOAD_VERSION https://github.com/wtarreau/h1load
 fi
 
 cd h1load

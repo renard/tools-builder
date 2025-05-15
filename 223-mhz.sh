@@ -4,7 +4,7 @@ set -e
 cd $SRC
 
 if ! test -d mhz; then
-    git clone https://github.com/wtarreau/mhz
+    git clone --depth 1 -b $MHZ_VERSION  https://github.com/wtarreau/mhz
 fi 
 
 cd mhz

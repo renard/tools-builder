@@ -9,7 +9,7 @@ if ! test -d socat; then
     git clone https://repo.or.cz/socat.git 
 fi
 cd socat
-
+git checkout $SOCAT_VERSION
 autoconf
 ./configure \
     --prefix="$PREFIX"

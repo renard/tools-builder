@@ -4,7 +4,7 @@ set -e
 cd $SRC
 
 if ! test -d inject; then
-    git clone https://github.com/wtarreau/inject
+    git clone  --depth 1 -b $INJECT_VERSION https://github.com/wtarreau/inject
 fi 
 
 cd inject

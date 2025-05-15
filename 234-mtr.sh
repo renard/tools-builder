@@ -10,7 +10,7 @@ if ! test -d mtr; then
     git clone https://github.com/traviscross/mtr 
 fi
 cd mtr 
-
+git checkout $MTR_VERSION
 ./bootstrap.sh
 ./configure \
     --without-gtk \
