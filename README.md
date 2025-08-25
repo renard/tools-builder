@@ -20,35 +20,37 @@ without having to rebuild them for all environments.
 
 * Libs:
 
-  * AWS-LC
+  * AWS-LC (https://github.com/aws/aws-lc)
+  * HTTP3 support (https://github.com/ngtcp2/nghttp3)
+  * HTTP2 support (https://github.com/nghttp2/nghttp2)
 
 * taffic generator:
 
-  * h1load
-  * h2load with http3 support
-  * curl with http3 support
-  * syslog injectors
-  * inject
+  * h1load (https://github.com/wtarreau/h1load)
+  * h2load (https://github.com/ngtcp2/ngtcp2) with http3 support
+  * curl (https://github.com/curl/curl) with http3 support
+  * syslog injectors (https://github.com/wtarreau/logcnt)
+  * inject (https://github.com/wtarreau/inject)
 
 * Servers:
 
-  * httpterm
-  * syslog server
+  * httpterm (https://github.com/wtarreau/httpterm)
+  * syslog server (https://github.com/wtarreau/logcnt)
 
 
 * monitoring:
 
-  * if_rate
-  * c2clat
-  * mhz
-  * ram latency
-  * tcpdump
+  * if_rate (https://github.com/wtarreau/if_rate)
+  * c2clat (https://github.com/rigtorp/c2clat )
+  * mhz (https://github.com/wtarreau/mhz)
+  * ram latency (https://github.com/wtarreau/ramspeed)
+  * tcpdump (https://github.com/the-tcpdump-group/tcpdump)
 
 * other tools
 
-  * nmap
-  * strace
-  * socat
+  * nmap (https://github.com/nmap/nmap )
+  * strace (https://github.com/strace/strace)
+  * socat (https://repo.or.cz/socat.git)
 
 ## Howto
 
