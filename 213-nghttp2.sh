@@ -4,7 +4,7 @@ set -e
 cd $SRC
 
 if ! test -d nghttp2; then
-    git clone https://github.com/nghttp2/nghttp2 
+    git clone --depth 1 -b $NGHTTP2_VERSION https://github.com/nghttp2/nghttp2
 fi
 
 cd nghttp2
