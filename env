@@ -24,7 +24,9 @@ MTR_VERSION=v0.95
 NMAP_VERSION=master
 SOCAT_VERSION=tag-1.8.0.3
 STRACE_VERSION=v6.14
-HAPROXY_VERSION=v3.1.0
+JQ_VERSION=jq-1.8.1
+HAPROXY_VERSION=v3.2.0
+
 
 # Uncomment this line to keep nghttp* apps. Binary file archive will
 # increase drastically since libicudata.so is statically linked.

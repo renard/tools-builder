@@ -46,6 +46,7 @@ without having to rebuild them for all environments.
 
 * other tools
 
+  * jq
   * nmap
   * strace
   * socat
