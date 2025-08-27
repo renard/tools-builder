@@ -30,8 +30,8 @@ echo debian-$DEBIAN_VERSION > $TARGET/etc/debian_chroot
 
 
 cat <<EOF | chroot $TARGET
-adduser build --disabled-password --comment 'package builder agent'
-groupmod -a -U build sudo
+adduser $BUILD_USER --uid $BUILD_UID --disabled-password --comment 'package builder agent'
+groupmod -a -U $BUILD_USER sudo
 cat <<EOF2 | EDITOR='tee -a' visudo -f /etc/sudoers.d/nopasswd
 Defaults:root !requiretty, !use_pty
 Defaults:%sudo !requiretty, !use_pty
@@ -39,6 +39,6 @@ Defaults:%sudo !requiretty, !use_pty
 %sudo ALL=(ALL:ALL) NOPASSWD: ALL
 root ALL=(ALL:ALL) NOPASSWD: ALL
 EOF2
-sudo -u build mkdir -p ~build/src
-sudo -u build mkdir -p ~build/$(basename $(dirname $0))
+sudo -u $BUILD_USER mkdir -p ~$BUILD_USER/src
+sudo -u $BUILD_USER mkdir -p ~$BUILD_USER/$(basename $(dirname $0))
 EOF
