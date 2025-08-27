@@ -4,11 +4,11 @@ set -e
 cd $SRC
 
 if ! test -d curl; then
-    git clone https://github.com/curl/curl
+    git clone --depth 1 -b  $CURL_VERSION https://github.com/curl/curl
 fi
 
 cd curl
-git checkout $CURL_VERSION
+
 autoreconf -fi
 ./configure \
     PKG_CONFIG_PATH="$PREFIX/lib/pkgconfig" \

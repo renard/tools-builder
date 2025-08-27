@@ -4,11 +4,10 @@ set -e
 cd $SRC
 
 if ! test -d patchelf; then
-    git clone https://github.com/NixOS/patchelf 
+    git clone --depth 1 -b $PATCHELF_VERSION https://github.com/NixOS/patchelf 
 fi
 
 cd patchelf 
-git checkout $PATCHELF_VERSION
 ./bootstrap.sh
 ./configure \
    LDFLAGS="--static $LDFLAGS" \

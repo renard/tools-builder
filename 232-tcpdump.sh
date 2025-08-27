@@ -4,11 +4,10 @@ set -e
 cd $SRC
 
 if ! test -d tcpdump; then
-    git clone https://github.com/the-tcpdump-group/tcpdump 
+    git clone --depth 1 -b $TCPDUMP_VERSION https://github.com/the-tcpdump-group/tcpdump 
 fi
 
 cd tcpdump 
-git checkout $TCPDUMP_VERSION
 
 ./autogen.sh
 ./configure \

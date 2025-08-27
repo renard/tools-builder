@@ -6,10 +6,10 @@ set -e
 cd $SRC
 
 if ! test -d socat; then
-    git clone https://repo.or.cz/socat.git 
+    git clone --depth 1 -b $SOCAT_VERSION https://repo.or.cz/socat.git 
 fi
 cd socat
-git checkout $SOCAT_VERSION
+
 autoconf
 ./configure \
     --prefix="$PREFIX"

@@ -7,10 +7,9 @@ set -e
 cd $SRC
 
 if ! test -d haproxy; then
-    git clone https://github.com/haproxy/haproxy
+    git clone --depth 1 -b  $HAPROXY_VERSION https://github.com/haproxy/haproxy
 fi
 cd haproxy 
-git checkout $HAPROXY_VERSION
 
 make -j $(nproc) \
 	TARGET=linux-glibc \

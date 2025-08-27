@@ -4,10 +4,9 @@ set -e
 cd $SRC
 
 if ! test -d rsync; then
-    git clone https://github.com/RsyncProject/rsync 
+    git clone --depth 1 -b $RSYNC_VERSION https://github.com/RsyncProject/rsync 
 fi
 cd rsync
-git checkout $RSYNC_VERSION
 
 ./configure \
     --disable-md2man \

@@ -7,10 +7,10 @@ set -e
 cd $SRC
 
 if ! test -d mtr; then
-    git clone https://github.com/traviscross/mtr 
+    git clone --depth 1 -b $MTR_VERSION https://github.com/traviscross/mtr 
 fi
 cd mtr 
-git checkout $MTR_VERSION
+
 ./bootstrap.sh
 ./configure \
     --without-gtk \

@@ -6,10 +6,9 @@ set -e
 cd $SRC
 
 if ! test -d strace; then
-    git clone https://github.com/strace/strace
+    git clone --depth 1 -b $STRACE_VERSION https://github.com/strace/strace
 fi
 cd strace
-git checkout $STRACE_VERSION
 
 ./bootstrap
 ./configure \

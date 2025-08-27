@@ -4,7 +4,7 @@ set -e
 cd $SRC
 
 if ! test -d ngtcp2; then
-    git clone --depth 1 -b $NGTCP3_VERSION https://github.com/ngtcp2/ngtcp2
+    git clone --depth 1 -b $NGTCP2_VERSION https://github.com/ngtcp2/ngtcp2
 fi
 
 cd ngtcp2

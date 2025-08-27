@@ -4,11 +4,10 @@ set -e
 cd $SRC
 
 if ! test -d libpcap; then
-    git clone https://github.com/the-tcpdump-group/libpcap
+    git clone --depth 1 -b $LIBPCAP_VERSION https://github.com/the-tcpdump-group/libpcap
 fi
 
 cd libpcap
-git checkout $LIBPCAP_VERSION
 
 autoreconf -fi
 ./configure \

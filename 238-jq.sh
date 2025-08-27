@@ -6,10 +6,10 @@ set -e
 cd $SRC
 
 if ! test -d jq; then
-    git clone https://github.com/jqlang/jq
+    git clone --depth 1 -b $JQ_VERSION https://github.com/jqlang/jq
 fi
 cd jq 
-git checkout $JQ_VERSION
+
 git submodule update --init --depth 1
 
 autoreconf -fi
