@@ -11,14 +11,17 @@ cd rsync
 
 # rsync only supports openssl
 for flavor in  openssl; do
-    ./configure \
+    # Force to use built openssl
+    CPPFLAGS="-I$PREFIX/$flavor/include" \
+		LDFLAGS="-L$PREFIX/$flavor/lib64" \
+		./configure \
         --disable-md2man \
         --enable-openssl=$PREFIX/$flavor \
         --prefix="$PREFIX/$flavor"
-    
+
     make -j$(nproc)
     make install
-    remove_version_needed "$PREFIX/$flavor/bin/rsync" libcrypto.so.3
+
     LD_LIBRARY_PATH=$PREFIX/$flavor/lib $PREFIX/$flavor/bin/rsync -V
 
     cp -a  $PREFIX/$flavor/bin/rsync $PREFIX/bin/rsync-$flavor
