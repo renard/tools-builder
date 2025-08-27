@@ -16,7 +16,10 @@ for flavor in  openssl; do
 		LDFLAGS="-L$PREFIX/$flavor/lib64" \
 		./configure \
         --disable-md2man \
-        --enable-openssl=$PREFIX/$flavor \
+        --enable-openssl \
+        --enable-roll-asm \
+        --enable-md5-asm \
+        --enable-acl-support \
         --prefix="$PREFIX/$flavor"
 
     make -j$(nproc)

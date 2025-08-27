@@ -12,7 +12,7 @@ TARGET=debian-$DEBIAN_VERSION
 debootstrap \
     --arch 'amd64' \
     --components 'main,contrib,non-free' \
-    --include='sudo,git,build-essential,autoconf,pkg-config,make,gcc,g++,cmake,libtool,libc-ares-dev,libevent-dev,libjansson-dev,libsystemd-dev,libxml2-dev,,libiberty-dev,zlib1g-dev,libjemalloc-dev,libev-dev,libpsl-dev,ca-certificates,automake,flex,bison,patchelf,libxxhash-dev,liblz4-dev,libzstd-dev,libncurses-dev,liblua5.4-dev,libpcre2-dev' \
+    --include='sudo,git,build-essential,autoconf,pkg-config,make,gcc,g++,cmake,libtool,libc-ares-dev,libevent-dev,libjansson-dev,libsystemd-dev,libxml2-dev,,libiberty-dev,zlib1g-dev,libjemalloc-dev,libev-dev,libpsl-dev,ca-certificates,automake,flex,bison,patchelf,libxxhash-dev,liblz4-dev,libzstd-dev,libncurses-dev,liblua5.4-dev,libpcre2-dev,libacl1-dev' \
     $DEBIAN_VERSION $TARGET \
     http://deb.debian.org/debian/
 
