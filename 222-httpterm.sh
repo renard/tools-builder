@@ -11,3 +11,4 @@ cd httpterm
 make clean
 make 
 cp httpterm "$PREFIX/bin/"
+"$PREFIX/bin/httpterm" -v

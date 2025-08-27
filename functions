@@ -1,0 +1,47 @@
+#
+# vim: ft=sh
+
+## Remove lib version.
+#  only keep .so and alter sonome to remove the versioned name.
+cleanup_lib_version() {
+    local pattern="$1"
+    if ! test -e "$pattern"; then
+        echo "$pattern not found"
+        exit 1
+        return
+    fi
+    local dir base real
+
+    dir=$(dirname "$pattern")
+    base=$(basename "$pattern")
+
+    find $dir/ -maxdepth 1 -name "$base*" -type l -delete
+    real=$(find $dir/ -maxdepth 1 -name "$base*" -type f)
+
+    mv -v "$real" "$dir/$base"
+    patchelf --set-soname $base "$dir/$base"
+ 
+    return
+}
+
+# Copy lib to dir and add variant in name and soname.
+add_lib_variant() {
+   local lib=$1
+   local dir=$2
+   local varient=$3
+   if ! test -f "$lib"; then
+       return
+   fi
+   name=$(basename $lib .so)
+   cp -av $lib $dir/$name-$varient.so
+   patchelf --set-soname $name-$varient.so $dir/$name-$varient.so
+}
+
+remove_version_needed() {
+  local lib=$1
+  local dep=$2
+
+  local dep_nv=$(echo $dep | sed -E 's/\.so([0-9.]*)$/.so/')
+  patchelf --replace-needed $dep $dep_nv $lib
+
+}

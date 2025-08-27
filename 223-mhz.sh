@@ -11,3 +11,4 @@ cd mhz
 make clean
 make 
 cp mhz "$PREFIX/bin/"
+"$PREFIX/bin/mhz" -h

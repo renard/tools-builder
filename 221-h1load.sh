@@ -8,6 +8,12 @@ if ! test -d h1load; then
 fi
 
 cd h1load
-make clean
-make SSL_CFLAGS="-I$PREFIX/include" SSL_LFLAGS="-Wl,-Bdynamic -L$PREFIX/lib -lssl -lcrypto -ldl"
-cp h1load "$PREFIX/bin/"
+for flavor in aws-lc openssl; do
+    make clean
+    make SSL_CFLAGS="-I$PREFIX/$flavor/include" SSL_LFLAGS="-Wl,-Bdynamic -L$PREFIX/$flavor/lib -lssl -lcrypto -ldl"
+    cp h1load "$PREFIX/bin/h1load-$flavor"
+    for l in libssl libcrypto; do
+       patchelf --replace-needed $l.so $l-$flavor.so $PREFIX/bin/h1load-$flavor
+    done
+    LD_LIBRARY_PATH=$PREFIX/lib $PREFIX/bin/h1load-$flavor -h
+done
