@@ -27,6 +27,7 @@ cleanup_lib_version $PREFIX/$flavor/lib/libngtcp2.so
 add_lib_variant $PREFIX/$flavor/lib/libngtcp2.so $PREFIX/lib $flavor
 
 
+make clean
 # ngtcp2 with openssl generates 2 extra libs.
 flavor=openssl
 ./configure --prefix=$PREFIX/$flavor --enable-lib-only  \
