@@ -26,10 +26,11 @@ for flavor in openssl; do
             remove_version_needed $PREFIX/$flavor/bin/$b $l
         done
 
-        cp -a $PREFIX/$flavor/bin/$b $PREFIX/bin/$b-$flavor
-        patchelf --replace-needed libcrypto.so libcrypto-$flavor.so $PREFIX/bin/$b-$flavor
-        patchelf --replace-needed libssl.so libssl-$flavor.so $PREFIX/bin/$b-$flavor
-        LD_LIBRARY_PATH=$PREFIX/lib $PREFIX/bin/nmap-$flavor -v
+        # Do not flavor the binary
+        cp -a $PREFIX/$flavor/bin/$b $PREFIX/bin/$b
+        patchelf --replace-needed libcrypto.so libcrypto-$flavor.so $PREFIX/bin/$b
+        patchelf --replace-needed libssl.so libssl-$flavor.so $PREFIX/bin/$b
     done
+    LD_LIBRARY_PATH=$PREFIX/lib $PREFIX/bin/nmap -v
     
 done

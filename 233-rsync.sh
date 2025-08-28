@@ -27,7 +27,7 @@ for flavor in  openssl; do
 
     LD_LIBRARY_PATH=$PREFIX/$flavor/lib $PREFIX/$flavor/bin/rsync -V
 
-    cp -a  $PREFIX/$flavor/bin/rsync $PREFIX/bin/rsync-$flavor
-    patchelf --replace-needed libcrypto.so libcrypto-$flavor.so $PREFIX/bin/rsync-$flavor
-    LD_LIBRARY_PATH=$PREFIX/lib $PREFIX/bin/rsync-$flavor -V
+    cp -a  $PREFIX/$flavor/bin/rsync $PREFIX/bin/rsync
+    patchelf --replace-needed libcrypto.so libcrypto-$flavor.so $PREFIX/bin/rsync
+    LD_LIBRARY_PATH=$PREFIX/lib $PREFIX/bin/rsync -V
 done

@@ -27,8 +27,8 @@ for flavor in openssl; do
     remove_version_needed $PREFIX/$flavor/bin/socat libssl.so.3
     remove_version_needed $PREFIX/$flavor/bin/socat libcrypto.so.3
 
-    cp -a $PREFIX/$flavor/bin/socat1 $PREFIX/bin/socat-$flavor
-    patchelf --replace-needed libssl.so libssl-$flavor.so $PREFIX/bin/socat-$flavor
-    patchelf --replace-needed libcrypto.so libcrypto-$flavor.so $PREFIX/bin/socat-$flavor
-    LD_LIBRARY_PATH=$PREFIX/lib $PREFIX/bin/socat-$flavor -V
+    cp -a $PREFIX/$flavor/bin/socat1 $PREFIX/bin/socat
+    patchelf --replace-needed libssl.so libssl-$flavor.so $PREFIX/bin/socat
+    patchelf --replace-needed libcrypto.so libcrypto-$flavor.so $PREFIX/bin/socat
+    LD_LIBRARY_PATH=$PREFIX/lib $PREFIX/bin/socat -V
 done
