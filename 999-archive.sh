@@ -41,31 +41,17 @@ $ARCHIVE/patchelf --set-rpath '$ORIGIN/../lib' $ARCHIVE/bin/*
 for l in $(find $ARCHIVE/lib -regextype grep -type f -not -regex '.*/\(ld-linux-.*\)'); do
     $ARCHIVE/patchelf --set-rpath '$ORIGIN' $l
 done
+
+# Do not strip libraries to prevent issues with some commands such as:
+#
+#  error while loading shared libraries: libcurl-aws-lc.so: ELF load command
+#  address/offset not page-aligned
+strip $ARCHIVE/bin/*  $ARCHIVE/patchelf
+du -shc $ARCHIVE
+
 for i in 1 5 7 8; do
     mkdir -p $ARCHIVE/man/man$i
     cp -a $PREFIX/{.,aws-lc,openssl}/share/man/man$i/* $ARCHIVE/man/man$i || true
-done
-
-#strip $ARCHIVE/bin/* $ARCHIVE/lib/* $ARCHIVE/patchelf
-strip $ARCHIVE/bin/*  $ARCHIVE/patchelf
-for f in $ARCHIVE/lib/*; do 
-    case $f in
-       #*libssl-openssl.so|*libssl-aws-lc.so) ;;
-       #*libcurl-openssl.so|*libcurl-aws-lc.so) ;;
-       *.so)
-           case $f in
-	       */libcrypto*) strip $f ;;
-	       */libnghttp2*) strip $f;;
-	       */libnghttp3*) strip $f;;
-	       */libngtcp2-*) strip $f;;
-	       */libngtcp2_crypto_ossl*) ;;
-	       */libssl*) ;;
-	       */libcurl*) ;;
-	       *) echo $f;;
-	   esac
-       ;;
-       *) strip $f;; 
-    esac
 done
 
 du -shc $ARCHIVE
