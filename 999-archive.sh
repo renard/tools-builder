@@ -17,7 +17,14 @@ rm -f \
     $ARCHIVE/bin/tcpdump.* \
     $ARCHIVE/bin/rsync-ssl \
     $ARCHIVE/bin/socat*.sh \
-    $ARCHIVE/bin/strace-log-merge
+    $ARCHIVE/bin/strace-log-merge \
+    $ARCHIVE/bin/fio2gnuplot \
+    $ARCHIVE/bin/fio_generate_plots \
+    $ARCHIVE/bin/fio_jsonplus_clat2csv \
+    $ARCHIVE/bin/fiologparser.py \
+    $ARCHIVE/bin/fiologparser_hist.py \
+    $ARCHIVE/bin/fio-histo-log-pctiles.py \
+    $ARCHIVE/bin/genfio 
 
 if test -z "$KEEP_NGHTTP_APPS"; then
 	rm -f $ARCHIVE/bin/nghttp*
