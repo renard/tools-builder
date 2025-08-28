@@ -4,6 +4,8 @@ set -e
 . "$(dirname $0)/functions"
 cd $SRC
 
+# apt-get install libacl1-dev
+
 if ! test -d rsync; then
     git clone --depth 1 -b $RSYNC_VERSION https://github.com/RsyncProject/rsync 
 fi
