@@ -41,6 +41,11 @@ $ARCHIVE/patchelf --set-rpath '$ORIGIN/../lib' $ARCHIVE/bin/*
 for l in $(find $ARCHIVE/lib -regextype grep -type f -not -regex '.*/\(ld-linux-.*\)'); do
     $ARCHIVE/patchelf --set-rpath '$ORIGIN' $l
 done
+for i in 1 5 7 8; do
+    mkdir -p $ARCHIVE/man/man$i
+    cp -a $PREFIX/{.,aws-lc,openssl}/share/man/man$i/* $ARCHIVE/man/man$i || true
+done
+
 #strip $ARCHIVE/bin/* $ARCHIVE/lib/* $ARCHIVE/patchelf
 strip $ARCHIVE/bin/*  $ARCHIVE/patchelf
 for f in $ARCHIVE/lib/*; do 
