@@ -7,7 +7,7 @@ set -e
 cd $SRC
 
 if ! test -d socat; then
-    git clone --depth 1 -b $SOCAT_VERSION https://repo.or.cz/socat.git 
+    git clone --depth 1 -b $SOCAT_VERSION https://third-party-mirror.googlesource.com/socat
 fi
 cd socat
 

@@ -54,7 +54,7 @@ without having to rebuild them for all environments.
 
   * nmap (https://github.com/nmap/nmap )
   * strace (https://github.com/strace/strace)
-  * socat (https://repo.or.cz/socat.git)
+  * socat (https://repo.or.cz/socat.git, mirror: https://third-party-mirror.googlesource.com/socat/)
   * jq (https://github.com/jqlang/jq)
   * fio (https://git.kernel.dk/cgit/fio/, mirror: https://github.com/axboe/fio)
   * mandoc (https://mandoc.bsd.lv/snapshots)
