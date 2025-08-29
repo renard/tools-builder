@@ -32,6 +32,10 @@ without having to rebuild them for all environments.
   * syslog injectors (https://github.com/wtarreau/logcnt)
   * inject (https://github.com/wtarreau/inject)
 
+* Proxys
+
+  * HAProxy (https://github.com/haproxy/haproxy)
+
 * Servers:
 
   * httpterm (https://github.com/wtarreau/httpterm)
@@ -51,6 +55,10 @@ without having to rebuild them for all environments.
   * nmap (https://github.com/nmap/nmap )
   * strace (https://github.com/strace/strace)
   * socat (https://repo.or.cz/socat.git)
+  * jq (https://github.com/jqlang/jq)
+  * fio (https://git.kernel.dk/cgit/fio/, mirror: https://github.com/axboe/fio)
+  * mandoc (https://mandoc.bsd.lv/snapshots)
+  * 7zip (https://github.com/ip7z/7zip)
 
 ## Howto
 
