@@ -6,6 +6,21 @@ cd $SRC
 
 if ! test -d openssl; then 
     git clone --depth 1 -b $OPENSSL_VERSION https://github.com/openssl/openssl
+
+    # ensures the OPENSSL_CONF is always set to /dev/null
+    cat <<'EOF' | patch -p0
+--- openssl/apps/openssl.c	2025-08-29 19:09:56.432523776 +0000
++++ openssl/apps/openssl.c	2025-08-29 19:11:08.989051577 +0000
+@@ -245,6 +245,9 @@
+     int global_version = 0;
+     int ret = 0;
+
++    /* Force OPENSSL_CONF to /dev/null if not defined */
++    setenv("OPENSSL_CONF", "/dev/null", 1);
++
+     arg.argv = NULL;
+     arg.size = 0;
+EOF
 fi
 cd openssl
 git submodule update --init --depth 1
