@@ -4,11 +4,13 @@ SRC=$HOME/src
 ARCHIVE=/tmp/bench-tools
 RELEASE=$(date +%Y-%m-%d_%H-%M-%S)
 
+AWS_LC_VERSION=v1.58.1
+OPENSSL_VERSION=openssl-3.5.2
 PATCHELF_VERSION=0.18.0
 AWS_LC_VERSION=v1.51.3
-NGHTTP2_VERSION=v1.64.0
-NGHTTP3_VERSION=v1.9.0
-NGTCP3_VERSION=v1.12.0
+NGHTTP3_VERSION=v1.11.0
+NGHTTP2_VERSION=v1.66.0
+NGTCP2_VERSION=v1.15.0
 IFRATE_VERSION=master
 H1LOAD_VERSION=master
 HTTPTERM_VERSION=master
@@ -17,15 +19,30 @@ RAMSPEED_VERSION=master
 INJECT_VERSION=master
 LOGCNT_VERSION=master
 C2CLAT_VERSION=master
-CURL_VERSION=curl-8_13_0
+CURL_VERSION=curl-8_15_0
 LIBPCAP_VERSION=libpcap-1.10.5
 TCPDUMP_VERSION=tcpdump-4.99.5
 RSYNC_VERSION=v3.4.1
-MTR_VERSION=v0.95
+MTR_VERSION=v0.96
 NMAP_VERSION=master
 SOCAT_VERSION=tag-1.8.0.3
-STRACE_VERSION=v6.14
-HAPROXY_VERSION=v3.1.0
+STRACE_VERSION=v6.16
+JQ_VERSION=jq-1.8.1
+FIO_VERSION=fio-3.40
+MANDOC_VERSION=1.14.6
+S_7ZIP_VERSION=25.01
+HAPROXY_VERSION=v3.3-dev7
+
+
+
+
+# User used that will do all the build
+#
+# On github actions, it should be runner with uid 1001.
+BUILD_USER=runner
+BUILD_UID=1001
+
+
 
 # Uncomment this line to keep nghttp* apps. Binary file archive will
 # increase drastically since libicudata.so is statically linked.
