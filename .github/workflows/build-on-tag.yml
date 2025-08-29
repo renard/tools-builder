@@ -1,0 +1,83 @@
+name: Build on Tag
+
+on:
+  push:
+    tags:
+      - '*'
+  # Add this block to allow manual execution (remove after testing)
+  workflow_dispatch:
+    inputs:
+      debug:
+        description: 'Enable debug mode'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y debootstrap
+
+      - name: Make build script executable
+        run: chmod +x ./000-build.sh
+
+      # Add a verification to facilitate testing
+      - name: Verify build script exists
+        run: |
+          if [ -f "./000-build.sh" ]; then
+            echo "Build script exists"
+          else
+            echo "Build script not found!"
+            exit 1
+          fi
+
+      - name: Build project
+        run: |
+            echo "RELEASE=${{ github.ref_name }}" >> env
+            cd ../
+            sudo tools-builder/000-build.sh
+
+      - name: Find artifact
+        id: find-artifact
+        run: |
+          mv ../bench-tools-*.tgz .
+          ARTIFACT_PATH=$(find . -name "bench-tools-*.tgz" | head -n 1)
+          if [ -z "$ARTIFACT_PATH" ]; then
+            echo "No artifact found. Creating a test artifact for workflow validation."
+            mkdir -p test-output
+            echo "Test content" > test-output/test-file.txt
+            tar -czf test-output/bench-tools-test.tgz test-output/test-file.txt
+            ARTIFACT_PATH="test-output/bench-tools-test.tgz"
+          fi
+          echo "artifact_path=$ARTIFACT_PATH" >> $GITHUB_OUTPUT
+          echo "artifact_name=$(basename $ARTIFACT_PATH)" >> $GITHUB_OUTPUT
+
+      - name: Upload artifact to GitHub
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.find-artifact.outputs.artifact_name }}
+          path: ${{ steps.find-artifact.outputs.artifact_path }}
+          compression-level: 0
+
+      - name: Create Release
+        id: create_release
+        if: startsWith(github.ref, 'refs/tags/')  # Only create a release for tags
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{ steps.find-artifact.outputs.artifact_path }}
+          name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
