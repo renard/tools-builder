@@ -59,6 +59,12 @@ without having to rebuild them for all environments.
   * fio (https://git.kernel.dk/cgit/fio/, mirror: https://github.com/axboe/fio)
   * mandoc (https://mandoc.bsd.lv/snapshots)
   * 7zip (https://github.com/ip7z/7zip)
+  * jwt-cli (https://github.com/mike-engel/jwt-cli/)[1].
+
+
+[1] - Cargo takes too long to compile. jwt binary is retrieved from a
+pre-build archive and made ready to use with provided libs for a
+proper relocation.
 
 ## Howto
 
