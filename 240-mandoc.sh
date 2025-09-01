@@ -62,6 +62,5 @@ cd mandoc
 
 ./configure 
 make
-cp -a man $PREFIX/bin
-cp man.1 $PREFIX/share/man/man.1
-
+cp -a man $PREFIX/binbt
+cp man.1 $PREFIX/share/man/manbt.1

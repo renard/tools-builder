@@ -57,7 +57,7 @@ without having to rebuild them for all environments.
   * socat (https://repo.or.cz/socat.git, mirror: https://third-party-mirror.googlesource.com/socat/)
   * jq (https://github.com/jqlang/jq)
   * fio (https://git.kernel.dk/cgit/fio/, mirror: https://github.com/axboe/fio)
-  * mandoc (https://mandoc.bsd.lv/snapshots)
+  * mandoc (https://mandoc.bsd.lv/snapshots). Renamed to `manbt` to prevent from system command clash.
   * 7zip (https://github.com/ip7z/7zip)
   * jwt-cli (https://github.com/mike-engel/jwt-cli/)[1].
 
