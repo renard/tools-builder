@@ -108,3 +108,13 @@ cp -a src/libfaketime.so.1  src/libfaketimeMT.so.1 $PREFIX/lib
 patchelf --add-needed libfaketimeMT.so.1 $PREFIX/bin/faketime
 patchelf --add-needed libfaketime.so.1 $PREFIX/bin/faketime
 ```
+
+## oha
+
+https://github.com/hatoo/oha
+
+Single static binary.
+
+Can be directly downloaded from https://github.com/hatoo/oha/releases/download/v1.9.0/oha-linux-amd64 (or any version).
+
+Does not require any library dependance.
