@@ -38,6 +38,7 @@ flavor=openssl
 
     done
 
+make clean
 flavor=aws-lc
     ./configure --enable-http3 --enable-app \
           --prefix=$PREFIX/$flavor \
