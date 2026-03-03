@@ -13,7 +13,7 @@ cd socat
 
 autoconf
 
-# socat only support openss
+# socat only supports openssl
 for flavor in openssl; do
     ./configure \
         PKG_CONFIG_PATH="$PREFIX/$flavor/lib/pkgconfig:$PREFIX/lib/pkgconfig" \

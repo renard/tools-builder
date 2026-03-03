@@ -43,7 +43,7 @@ patchelf --replace-needed libcrypto.so.3 libcrypto.so $PREFIX/$flavor/lib64/libs
 
 add_lib_variant $PREFIX/$flavor/lib64/libcrypto.so $PREFIX/lib $flavor
 add_lib_variant $PREFIX/$flavor/lib64/libssl.so $PREFIX/lib $flavor
-# Fix libcrypto dependancey in taget
+# Fix libcrypto dependency in target
 patchelf --replace-needed libcrypto.so libcrypto-openssl.so $PREFIX/lib/libssl-openssl.so
 
 # Fix binaries
