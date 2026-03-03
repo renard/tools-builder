@@ -9,7 +9,7 @@ without having to rebuild them for all environments.
 
 ## Workflow
 
-* A Debian chroot is create to build all binaries in a sandbox.
+* A Debian chroot is created to build all binaries in a sandbox.
 
 * Tools are downloaded from their official git repos and built in the
   sandbox.
@@ -24,7 +24,7 @@ without having to rebuild them for all environments.
   * HTTP3 support (https://github.com/ngtcp2/nghttp3)
   * HTTP2 support (https://github.com/nghttp2/nghttp2)
 
-* taffic generator:
+* traffic generator:
 
   * h1load (https://github.com/wtarreau/h1load)
   * h2load (https://github.com/ngtcp2/ngtcp2) with http3 support
@@ -32,7 +32,7 @@ without having to rebuild them for all environments.
   * syslog injectors (https://github.com/wtarreau/logcnt)
   * inject (https://github.com/wtarreau/inject)
 
-* Proxys
+* Proxies
 
   * HAProxy (https://github.com/haproxy/haproxy)
 
@@ -78,7 +78,7 @@ proper relocation.
 * Run the `fix-interpreter` script to instruct all binaries to use
   provided `ld-linux` interpreter.
 
-* Optionnaly deploy the tools in the `PATH` (ie. `install-tools
+* Optionally deploy the tools in the `PATH` (ie. `install-tools
   /usr/local/bin/`)
 
 
@@ -87,15 +87,15 @@ proper relocation.
 
 * Create the chroot with `010-build-debian.sh`
 
-* Mount this repo into the chroot into `~build/tools-builder`:
+* Mount this repo into the chroot into `~runner/tools-builder`:
 
 ```
-mount -o bind,ro /path/to/tools-builder CHROOT/home/build/tools-builder
+mount -o bind,ro /path/to/tools-builder CHROOT/home/runner/tools-builder
 ```
 
 * Enter the chroot: `chroot CHROOT`
 
-* Become `build`: `sudo -u build -i`
+* Become `runner`: `sudo -u runner -i`
 
 * Execute a build script: `./tools-builder/the-script.sh`
 
@@ -103,7 +103,7 @@ After testing, do not forget to unmount the `tools-builder` from the
 chroot:
 
 ```
-umount CHROOT/home/build/tools-builder
+umount CHROOT/home/runner/tools-builder
 ```
 
 
