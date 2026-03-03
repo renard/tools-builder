@@ -2,13 +2,12 @@
 # vim: ft=sh
 
 ## Remove lib version.
-#  only keep .so and alter sonome to remove the versioned name.
+#  only keep .so and alter soname to remove the versioned name.
 cleanup_lib_version() {
     local pattern="$1"
     if ! test -e "$pattern"; then
         echo "$pattern not found"
         exit 1
-        return
     fi
     local dir base real
 
@@ -20,21 +19,19 @@ cleanup_lib_version() {
 
     mv -v "$real" "$dir/$base"
     patchelf --set-soname $base "$dir/$base"
- 
-    return
 }
 
 # Copy lib to dir and add variant in name and soname.
 add_lib_variant() {
    local lib=$1
    local dir=$2
-   local varient=$3
+   local variant=$3
    if ! test -f "$lib"; then
        return
    fi
    name=$(basename $lib .so)
-   cp -av $lib $dir/$name-$varient.so
-   patchelf --set-soname $name-$varient.so $dir/$name-$varient.so
+   cp -av $lib $dir/$name-$variant.so
+   patchelf --set-soname $name-$variant.so $dir/$name-$variant.so
 }
 
 remove_version_needed() {
