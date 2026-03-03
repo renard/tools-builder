@@ -16,6 +16,7 @@ for flavor in openssl; do
     ./configure \
         PKG_CONFIG_PATH="$PREFIX/$flavor/lib/pkgconfig:$PREFIX/lib/pkgconfig" \
         CFLAGS="-I$PREFIX/include -L$PREFIX/lib" \
+        --with-libpcap=$PREFIX \
         --prefix="$PREFIX/$flavor"
     
     make -j$(nproc)
