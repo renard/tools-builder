@@ -15,8 +15,8 @@ if ! test -d openssl; then
      int global_version = 0;
      int ret = 0;
 
-+    /* Force OPENSSL_CONF to /dev/null if not defined */
-+    setenv("OPENSSL_CONF", "/dev/null", 1);
++    /* Set OPENSSL_CONF to /dev/null if not defined */
++    setenv("OPENSSL_CONF", "/dev/null", 0);
 +
      arg.argv = NULL;
      arg.size = 0;
