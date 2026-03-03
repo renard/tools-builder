@@ -3,7 +3,7 @@
 # This script will run all the builds in the debian chroot environment.
 
 onerror() {
-	umount $TARGET/home/build/$(basename $(dirname $0)) || true
+	umount $TARGET/home/$BUILD_USER/$(basename $(dirname $0)) || true
 }
 trap 'onerror' ERR EXIT
 
@@ -31,7 +31,7 @@ fi
 
 set -e
 for f in $(dirname $0)/[1-9]*.sh; do
-    chroot debian-bookworm sudo -u $BUILD_USER -i $f
+    chroot $TARGET sudo -u $BUILD_USER -i $f
 done
 #chroot debian-bookworm sudo -u build -i $(dirname $0)/998-archive.sh
 
