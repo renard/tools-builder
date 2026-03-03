@@ -16,7 +16,7 @@ autoconf
 # socat only support openss
 for flavor in openssl; do
     ./configure \
-        PKG_CONFIG_PATH="$PREFIX/$flavor/lib/pgkconfig:$PREFIX/lib/pkgconfig" \
+        PKG_CONFIG_PATH="$PREFIX/$flavor/lib/pkgconfig:$PREFIX/lib/pkgconfig" \
         --prefix="$PREFIX/$flavor"
 
     make progs -j$(nproc)
