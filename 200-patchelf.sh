@@ -12,12 +12,5 @@ cd patchelf
 ./configure \
    LDFLAGS="--static $LDFLAGS" \
    --prefix=$PREFIX
-make
-make install
-exit
-./configure \
-    PKG_CONFIG_PATH="$PREFIX/lib/pkgconfig" \
-    --prefix="$PREFIX"
-
 make -j$(nproc)
 make install
