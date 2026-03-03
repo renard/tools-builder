@@ -6,7 +6,7 @@ set -e
 cd $SRC
 
 if ! test -d fio; then
-    git clone --depth 1 -b $FIO_VERSION git://git.kernel.dk/fio.git
+    git clone --depth 1 -b $FIO_VERSION https://github.com/axboe/fio
 fi
 cd fio
 
