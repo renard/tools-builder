@@ -61,9 +61,13 @@ same machine without any conflict.
 
 * Libs:
 
+  * OpenSSL (https://github.com/openssl/openssl)
   * AWS-LC (https://github.com/aws/aws-lc)
-  * HTTP3 support (https://github.com/ngtcp2/nghttp3)
-  * HTTP2 support (https://github.com/nghttp2/nghttp2)
+  * HTTP3 support - nghttp3 (https://github.com/ngtcp2/nghttp3)
+  * HTTP2 support - nghttp2 (https://github.com/nghttp2/nghttp2)
+  * QUIC/HTTP3 transport - ngtcp2 (https://github.com/ngtcp2/ngtcp2)
+  * libpcap (https://github.com/the-tcpdump-group/libpcap)
+  * patchelf (https://github.com/NixOS/patchelf)
 
 * traffic generator:
 
@@ -86,14 +90,16 @@ same machine without any conflict.
 * monitoring:
 
   * if_rate (https://github.com/wtarreau/if_rate)
-  * c2clat (https://github.com/rigtorp/c2clat )
+  * c2clat (https://github.com/rigtorp/c2clat)
   * mhz (https://github.com/wtarreau/mhz)
   * ram latency (https://github.com/wtarreau/ramspeed)
+  * mtr (https://github.com/traviscross/mtr)
   * tcpdump (https://github.com/the-tcpdump-group/tcpdump)
 
 * other tools
 
-  * nmap (https://github.com/nmap/nmap )
+  * nmap (https://github.com/nmap/nmap)
+  * rsync (https://github.com/RsyncProject/rsync)
   * strace (https://github.com/strace/strace)
   * socat (https://repo.or.cz/socat.git, mirror: https://third-party-mirror.googlesource.com/socat/)
   * jq (https://github.com/jqlang/jq)
