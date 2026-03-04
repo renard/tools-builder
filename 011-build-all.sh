@@ -2,8 +2,12 @@
 
 # This script will run all the builds in the debian chroot environment.
 
+_mounted=0
+
 onerror() {
-	umount $TARGET/home/$BUILD_USER/$(basename $(dirname $0)) || true
+	if test $_mounted -eq 1; then
+		umount $TARGET/home/$BUILD_USER/$(basename $(dirname $0)) || true
+	fi
 }
 trap 'onerror' ERR EXIT
 
@@ -25,10 +29,12 @@ if ! test -e $_dst/env; then
 	if test $? -ne 0; then
 		tar --exclude="debian-$DEBIAN_VERSION" -cf - . \
 			| (cd "debian-$DEBIAN_VERSION/home/$BUILD_USER" && tar -xf -)
+	else
+		_mounted=1
 	fi
 fi
 
-
+chroot $TARGET sudo -u $BUILD_USER mkdir -p /home/$BUILD_USER/src
 set -e
 for f in $(dirname $0)/[1-9]*.sh; do
     chroot $TARGET sudo -u $BUILD_USER -i $f
