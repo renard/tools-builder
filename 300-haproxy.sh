@@ -9,7 +9,13 @@ cd $SRC
 if ! test -d haproxy; then
     git clone --depth 1 -b  $HAPROXY_VERSION https://github.com/haproxy/haproxy
 fi
-cd haproxy 
+cd haproxy
+
+# Detect haterm support (available since HAProxy 3.4)
+_haterm=
+if grep -q '^haterm' Makefile; then
+    _haterm=haterm
+fi
 
 # openssl
 make -j $(nproc) \
@@ -34,12 +40,18 @@ make -j $(nproc) \
 	USE_TFO=1 \
 	USE_THREAD=1 \
 	VERDATE="$(git log -1 --format=%at | xargs -I{} date -d @{} '+%Y/%m/%d')" \
-	SUBVERS="$(git describe | cut -d - -f 3-)"
+	SUBVERS="$(git describe | cut -d - -f 3-)" all $_haterm
 
 flavor=openssl
 cp haproxy $PREFIX/bin/haproxy-$flavor
+if test -n "$_haterm"; then
+    cp haterm $PREFIX/bin/haterm-$flavor
+fi
 for l in libssl libcrypto; do
     patchelf --replace-needed $l.so $l-$flavor.so $PREFIX/bin/haproxy-$flavor
+    if test -n "$_haterm"; then
+        patchelf --replace-needed $l.so $l-$flavor.so $PREFIX/bin/haterm-$flavor
+    fi
 done
 
 make -j $(nproc) \
@@ -64,10 +76,16 @@ make -j $(nproc) \
 	USE_TFO=1 \
 	USE_THREAD=1 \
 	VERDATE="$(git log -1 --format=%at | xargs -I{} date -d @{} '+%Y/%m/%d')" \
-	SUBVERS="$(git describe | cut -d - -f 3-)"
+	SUBVERS="$(git describe | cut -d - -f 3-)" all $_haterm
 
 flavor=aws-lc
 cp haproxy $PREFIX/bin/haproxy-$flavor
+if test -n "$_haterm"; then
+    cp haterm $PREFIX/bin/haterm-$flavor
+fi
 for l in libssl libcrypto; do
     patchelf --replace-needed $l.so $l-$flavor.so $PREFIX/bin/haproxy-$flavor
+    if test -n "$_haterm"; then
+        patchelf --replace-needed $l.so $l-$flavor.so $PREFIX/bin/haterm-$flavor
+    fi
 done
