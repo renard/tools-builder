@@ -20,7 +20,7 @@ if ! test -d mandoc; then
  
  #include "mandoc_aux.h"
  #include "mandoc.h"
-@@ -177,6 +178,21 @@
+@@ -177,6 +178,22 @@
  		errx((int)MANDOCLEVEL_SYSERR, "sandbox_init");
  #endif
  
@@ -35,6 +35,7 @@ if ! test -d mandoc; then
 +			char relpath[PATH_MAX];
 +			snprintf(relpath, sizeof(relpath), "%s/../man", dir);
 +			setenv("MANPATH", relpath,1);
++                        printf("search in %s\n", relpath);
 +		}
 +	}
 +
@@ -42,7 +43,30 @@ if ! test -d mandoc; then
  	/* Search options. */
  
  	memset(&conf, 0, sizeof(conf));
-@@ -822,8 +838,10 @@
+@@ -187,7 +204,10 @@
+ 	search.outkey = "Nd";
+ 	oarg = NULL;
+ 
+-	if (strcmp(progname, BINM_MAN) == 0)
++	if (strcmp(progname, BINM_MAN) == 0 ||
++            // man is named manbt as per man bench tool to not
++            // interfer with system man command
++            strcmp(progname, "manbt") == 0)
+ 		search.argmode = ARG_NAME;
+ 	else if (strcmp(progname, BINM_APROPOS) == 0)
+ 		search.argmode = ARG_EXPR;
+@@ -208,7 +228,9 @@
+ 
+ 	memset(&outst, 0, sizeof(outst));
+ 	outst.tag_files = NULL;
+-	outst.outtype = OUTT_LOCALE;
++        // render correctly non ascii chars
++	outst.outtype = OUTT_ASCII;
++	//        setenv("LESSCHARSET", "utf-8", 0);
+ 	outst.use_pager = 1;
+ 
+ 	show_usage = 0;
+@@ -822,8 +844,10 @@
  	return globres;
  
  found:
@@ -61,6 +85,7 @@ cd mandoc
 
 
 ./configure 
-make
-cp -a man $PREFIX/binbt
-cp man.1 $PREFIX/share/man/manbt.1
+make -j$(nbproc)
+cp -a man $PREFIX/bin/manbt
+mkdir -p $PREFIX/share/man/man1
+cp man.1 $PREFIX/share/man/man1/manbt.1
