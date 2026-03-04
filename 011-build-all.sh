@@ -37,7 +37,10 @@ fi
 chroot $TARGET sudo -u $BUILD_USER mkdir -p /home/$BUILD_USER/src
 set -e
 for f in $(dirname $0)/[1-9]*.sh; do
-    chroot $TARGET sudo -u $BUILD_USER -i $f
+	echo "*** BUILDING $f ***"
+	time chroot $TARGET sudo -u $BUILD_USER -i $f
+	echo "*** $f DONE: $? ***"
+	echo
 done
 #chroot debian-bookworm sudo -u build -i $(dirname $0)/998-archive.sh
 
