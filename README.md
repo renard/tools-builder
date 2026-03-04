@@ -107,7 +107,7 @@ same machine without any conflict.
   * mandoc (https://mandoc.bsd.lv/snapshots). Renamed to `manbt` to prevent from system command clash.
   * 7zip (https://github.com/ip7z/7zip)
   * jwt-cli (https://github.com/mike-engel/jwt-cli/)[1].
-
+  * timewarp (https://github.com/renard/timewarp)
 
 [1] - Cargo takes too long to compile. jwt binary is retrieved from a
 pre-built release archive and made ready to use with provided libs for
