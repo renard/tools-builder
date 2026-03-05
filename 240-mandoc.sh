@@ -85,7 +85,7 @@ cd mandoc
 
 
 ./configure 
-make -j$(nbproc)
+make -j$(nproc)
 cp -a man $PREFIX/bin/manbt
 mkdir -p $PREFIX/share/man/man1
 cp man.1 $PREFIX/share/man/man1/manbt.1

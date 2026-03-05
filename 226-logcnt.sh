@@ -9,5 +9,5 @@ fi
 
 cd logcnt
 make clean
-make 
+make -j$(nproc)
 cp src/logcnt src/loggen "$PREFIX/bin/"

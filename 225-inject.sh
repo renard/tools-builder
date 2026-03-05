@@ -9,5 +9,5 @@ fi
 
 cd inject
 make clean
-make 
+make -j$(nproc)
 cp inject "$PREFIX/bin/"

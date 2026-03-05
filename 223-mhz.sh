@@ -9,6 +9,6 @@ fi
 
 cd mhz
 make clean
-make 
+make -j$(nproc)
 cp mhz "$PREFIX/bin/"
 "$PREFIX/bin/mhz" -h

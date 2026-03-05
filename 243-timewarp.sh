@@ -9,5 +9,5 @@ fi
 
 cd timewarp
 make clean
-make
+make -j$(nproc)
 cp timewarp timewarp-ctl "$PREFIX/bin/"

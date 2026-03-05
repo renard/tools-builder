@@ -9,5 +9,5 @@ fi
 
 cd ramspeed
 make clean
-make 
+make -j$(nproc)
 cp rambw ramlat ramwalk "$PREFIX/bin/"

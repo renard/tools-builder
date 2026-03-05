@@ -9,6 +9,6 @@ fi
 
 cd httpterm
 make clean
-make 
+make -j$(nproc)
 cp httpterm "$PREFIX/bin/"
 "$PREFIX/bin/httpterm" -v
