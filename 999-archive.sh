@@ -72,13 +72,13 @@ for f in $(find $mydir/bin -type f -executable); do
     $mydir/patchelf --set-rpath '$ORIGIN/../lib' $f
 done
 
-# Set haproxy capabilities if user is root
 if test $(id -u) -eq 0; then
+    # Set haproxy capabilities if user is root
     for f in $(find $mydir/bin -type f -executable -name 'haproxy-*'); do
         # binary must be own by root for the capabilities to be effective
         chown root:root $f
         # when executed in secure mode (with capabilities for example) the
-        # dynamic linker ignores $ORIGIN in RPATH (see ld.so(8)). One solition
+        # dynamic linker ignores $ORIGIN in RPATH (see ld.so(8)). One solution
         # is to use an absolute rpath. The binary is then not fully relocable
         # and fix-interpreter should be re-run if the files are moved.
         $mydir/patchelf --set-rpath "$mydir/lib" $f
@@ -86,6 +86,13 @@ if test $(id -u) -eq 0; then
         #  - cap_net_bind_service: bind to privileged ports.
         #  - cap_net_raw: allow raw sockets (transparent proxy).
         setcap 'cap_net_bind_service,cap_net_raw=ep' $f
+    done
+    # Set fping capabilities if user is root
+    for f in $(find $mydir/bin -type f -executable -name 'fping'); do
+        # See haproxy above
+        root:root $f
+        $mydir/patchelf --set-rpath "$mydir/lib" $f
+        setcap 'cap_net_raw,cap_net_admin=ep' $f
     done
 fi
 
