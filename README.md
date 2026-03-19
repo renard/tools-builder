@@ -79,7 +79,7 @@ same machine without any conflict.
 
 * Proxies
 
-  * HAProxy (https://github.com/haproxy/haproxy)
+  * HAProxy (http://git.haproxy.org)
 
 * Servers:
 
