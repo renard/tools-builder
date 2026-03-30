@@ -13,8 +13,12 @@ cd aws-lc
 flavor=aws-lc
 cmake -B build \
     -DDISABLE_GO=ON \
+    -DDISABLE_PERL=1 \
     -DBUILD_SHARED_LIBS=1 \
     -DBUILD_TESTING=0 \
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+    -DFIPS=0 \
+    -DCMAKE_INSTALL_LIBDIR=lib \
     --install-prefix=$PREFIX/$flavor
 
 make -j$(nproc) -C build
