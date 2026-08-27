@@ -90,7 +90,7 @@ if test $(id -u) -eq 0; then
     # Set fping capabilities if user is root
     for f in $(find $mydir/bin -type f -executable -name 'fping'); do
         # See haproxy above
-        root:root $f
+		chown root:root $f
         $mydir/patchelf --set-rpath "$mydir/lib" $f
         setcap 'cap_net_raw,cap_net_admin=ep' $f
     done
