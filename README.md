@@ -106,7 +106,7 @@ same machine without any conflict.
   * fio (https://git.kernel.dk/cgit/fio/, mirror: https://github.com/axboe/fio)
   * mandoc (https://mandoc.bsd.lv/snapshots). Renamed to `manbt` to prevent from system command clash.
   * 7zip (https://github.com/ip7z/7zip)
-  * jwt-cli (https://github.com/mike-engel/jwt-cli/)[1].
+  * jwt-cli (https://github.com/mike-engel/jwt-cli/) [1].
   * timewarp (https://github.com/renard/timewarp)
   * fping (https://github.com/schweikert/fping)
 
