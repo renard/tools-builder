@@ -42,7 +42,6 @@ for f in $(dirname $0)/[1-9]*.sh; do
 	echo "*** $f DONE: $? ***"
 	echo
 done
-#chroot debian-bookworm sudo -u build -i $(dirname $0)/998-archive.sh
 
 mv $TARGET/$ARCHIVE-*.tgz .
 
