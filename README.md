@@ -59,56 +59,68 @@ same machine without any conflict.
 
 ## Tools
 
+The version of each entry is substituted from the `env` file by
+`update-readme.sh`. Each entry carries the `env` variable to take its
+version from in an HTML comment, invisible once rendered:
+
+```
+* OpenSSL <!-- OPENSSL_VERSION --> 3.6.5 (https://github.com/openssl/openssl)
+```
+
+Branch names such as `master` or `dev` are dropped. Run
+`update-readme.sh` each time the `env` file is modified.
+
 * Libs:
 
-  * OpenSSL (https://github.com/openssl/openssl)
-  * AWS-LC (https://github.com/aws/aws-lc)
-  * HTTP3 support - nghttp3 (https://github.com/ngtcp2/nghttp3)
-  * HTTP2 support - nghttp2 (https://github.com/nghttp2/nghttp2)
-  * QUIC/HTTP3 transport - ngtcp2 (https://github.com/ngtcp2/ngtcp2)
-  * libpcap (https://github.com/the-tcpdump-group/libpcap)
-  * patchelf (https://github.com/NixOS/patchelf)
+  * OpenSSL <!-- OPENSSL_VERSION --> 3.6.5 (https://github.com/openssl/openssl)
+  * AWS-LC <!-- AWS_LC_VERSION --> 5.1.0 (https://github.com/aws/aws-lc)
+  * HTTP3 support - nghttp3 <!-- NGHTTP3_VERSION --> 1.18.0 (https://github.com/ngtcp2/nghttp3)
+  * HTTP2 support - nghttp2 <!-- NGHTTP2_VERSION --> 1.70.0 (https://github.com/nghttp2/nghttp2)
+  * QUIC/HTTP3 transport - ngtcp2 <!-- NGTCP2_VERSION --> 1.25.0 (https://github.com/ngtcp2/ngtcp2)
+  * libpcap <!-- LIBPCAP_VERSION --> 1.11.0 (https://github.com/the-tcpdump-group/libpcap)
+  * patchelf <!-- PATCHELF_VERSION --> 0.19.2 (https://github.com/NixOS/patchelf)
 
 * traffic generator:
 
-  * h1load (https://github.com/wtarreau/h1load)
-  * h2load (https://github.com/ngtcp2/ngtcp2) with http3 support
-  * curl (https://github.com/curl/curl) with http3 support
-  * syslog injectors (https://github.com/wtarreau/logcnt)
-  * inject (https://github.com/wtarreau/inject)
+  * h1load <!-- H1LOAD_VERSION --> (https://github.com/wtarreau/h1load)
+  * h2load <!-- NGTCP2_VERSION --> 1.25.0 (https://github.com/ngtcp2/ngtcp2) with http3 support
+  * curl <!-- CURL_VERSION --> 8_22_0 (https://github.com/curl/curl) with http3 support
+  * syslog injectors <!-- LOGCNT_VERSION --> (https://github.com/wtarreau/logcnt)
+  * inject <!-- INJECT_VERSION --> (https://github.com/wtarreau/inject)
 
 * Proxies
 
-  * HAProxy (http://git.haproxy.org)
+  * HAProxy <!-- HAPROXY_VERSIONS --> 3.2.25 3.3.16 3.4.6 3.5-dev8 (http://git.haproxy.org)
+  * HAPEE <!-- HAPEE_VERSIONS --> (http://git.hapee.org)
 
 * Servers:
 
-  * httpterm (https://github.com/wtarreau/httpterm)
-  * syslog server (https://github.com/wtarreau/logcnt)
+  * httpterm <!-- HTTPTERM_VERSION --> (https://github.com/wtarreau/httpterm)
+  * syslog server <!-- LOGCNT_VERSION --> (https://github.com/wtarreau/logcnt)
 
 
 * monitoring:
 
-  * if_rate (https://github.com/wtarreau/if_rate)
-  * c2clat (https://github.com/rigtorp/c2clat)
-  * mhz (https://github.com/wtarreau/mhz)
-  * ram latency (https://github.com/wtarreau/ramspeed)
-  * mtr (https://github.com/traviscross/mtr)
-  * tcpdump (https://github.com/the-tcpdump-group/tcpdump)
+  * if_rate <!-- IFRATE_VERSION --> (https://github.com/wtarreau/if_rate)
+  * c2clat <!-- C2CLAT_VERSION --> (https://github.com/rigtorp/c2clat)
+  * mhz <!-- MHZ_VERSION --> (https://github.com/wtarreau/mhz)
+  * ram latency <!-- RAMSPEED_VERSION --> (https://github.com/wtarreau/ramspeed)
+  * mtr <!-- MTR_VERSION --> 0.96 (https://github.com/traviscross/mtr)
+  * tcpdump <!-- TCPDUMP_VERSION --> 4.99.7 (https://github.com/the-tcpdump-group/tcpdump)
 
 * other tools
 
-  * nmap (https://github.com/nmap/nmap)
-  * rsync (https://github.com/RsyncProject/rsync)
-  * strace (https://github.com/strace/strace)
-  * socat (https://repo.or.cz/socat.git, mirror: https://third-party-mirror.googlesource.com/socat/)
-  * jq (https://github.com/jqlang/jq)
-  * fio (https://git.kernel.dk/cgit/fio/, mirror: https://github.com/axboe/fio)
-  * mandoc (https://mandoc.bsd.lv/snapshots). Renamed to `manbt` to prevent from system command clash.
-  * 7zip (https://github.com/ip7z/7zip)
-  * jwt-cli (https://github.com/mike-engel/jwt-cli/) [1].
-  * timewarp (https://github.com/renard/timewarp)
-  * fping (https://github.com/schweikert/fping)
+  * nmap <!-- NMAP_VERSION --> (https://github.com/nmap/nmap)
+  * rsync <!-- RSYNC_VERSION --> 3.5.1 (https://github.com/RsyncProject/rsync)
+  * strace <!-- STRACE_VERSION --> 7.2 (https://github.com/strace/strace)
+  * socat <!-- SOCAT_VERSION --> tag-1.8.1.3 (https://repo.or.cz/socat.git, mirror: https://third-party-mirror.googlesource.com/socat/)
+  * jq <!-- JQ_VERSION --> 1.8.2 (https://github.com/jqlang/jq)
+  * fio <!-- FIO_VERSION --> 3.43 (https://git.kernel.dk/cgit/fio/, mirror: https://github.com/axboe/fio)
+  * mandoc <!-- MANDOC_VERSION --> 1.14.6 (https://mandoc.bsd.lv/snapshots). Renamed to `manbt` to prevent from system command clash.
+  * 7zip <!-- S_7ZIP_VERSION --> 26.04 (https://github.com/ip7z/7zip)
+  * jwt-cli <!-- JWT_CLI_VERSION --> 6.2.0 (https://github.com/mike-engel/jwt-cli/) [1].
+  * timewarp <!-- TIMEWARP_VERSION --> (https://github.com/renard/timewarp)
+  * fping <!-- FPING_VERSION --> 5.5 (https://github.com/schweikert/fping)
 
 
 [1] - Cargo takes too long to compile. jwt binary is retrieved from a
@@ -284,6 +296,10 @@ via `workflow_dispatch`.
 
 
 ## Adding a new tool
+
+* Add the `TOOL_VERSION` variable to the `env` file and a tools list
+  entry to `README.md` with a `<!-- TOOL_VERSION -->` marker, then
+  run `update-readme.sh`.
 
 * Create the chroot with `010-build-debian.sh`
 
